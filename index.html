@@ -1,1 +1,18 @@
-<h1>Hello</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+
+  <body>
+    <div x-data="{ open: false }">
+      <button @click="open = true">Expand</button>
+   
+      <span x-show="open">
+          Content...
+      </span>
+  </div>
+
+    <script src="//unpkg.com/alpinejs" defer></script>
+  </body>
+
+</html>
