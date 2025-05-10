@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="//unpkg.com/alpinejs" defer></script>
   </head>
 
   <body>
-    <div x-data="{ open: false }">
-      <button @click="open = true">Expand</button>
-   
-      <span x-show="open">
-          Content...
-      </span>
-  </div>
+    <h1>VEMA NFC TOOL</h1>
 
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <div x-data="nfc">
+      <button @click="startScan()" :disabled="isScanning">Start Scan</button>
+      <button @click="stopScan()" :disabled="!isScanning">Stop Scan</button>
+    </div>
+
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('nfc', () => ({
+          isScanning: false,
+
+          startScan() {
+            console.log('Start scanning...');
+            this.isScanning = true;
+
+            this.ndef = new NDEFReader();
+            this.ndef.scan();
+
+          },
+          stopScan() {
+            console.log('Stop scanning...');
+            this.isScanning = false;
+          }
+        }));
+      });
+    </script>
   </body>
 
 </html>
